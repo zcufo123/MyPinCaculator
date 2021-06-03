@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MyPinCaculator</string>
+    <string name="pin_too_short">The entered pin is too short</string>
+    <string name="pin_too_long">The entered pin is too long</string>
+</resources>
