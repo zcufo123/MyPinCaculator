@@ -14,9 +14,9 @@ class ISO3Formatter : Formatter() {
         val pinArray = pin.map { it.toString().toByte() }.toByteArray()
         result[0] = setHiNibbleValue(HEADER) or setLowNibbleValue(pinArray.size.toByte())
         for (i in 1 until result.lastIndex) {
-            val index: Int = (i - 1) * 2;
-            val hiNibbleValue = if (index <= pin.lastIndex) pinArray[index] else RandomByte()
-            val loNibbleValue = if ((index + 1) <= pin.lastIndex) pinArray[index + 1] else RandomByte()
+            val index: Int = (i - 1) * 2
+            val hiNibbleValue = if (index <= pin.lastIndex) pinArray[index] else randomNumber()
+            val loNibbleValue = if ((index + 1) <= pin.lastIndex) pinArray[index + 1] else randomNumber()
             result[i] = setHiNibbleValue(hiNibbleValue) or setLowNibbleValue(loNibbleValue)
         }
         for (i in 0 until result.lastIndex) {
@@ -25,7 +25,7 @@ class ISO3Formatter : Formatter() {
         return result
     }
 
-    private fun RandomByte(): Byte {
+    private fun randomNumber(): Byte {
         return (10..15).random().toByte()
     }
 }

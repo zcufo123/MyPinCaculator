@@ -11,17 +11,17 @@ import com.test.mypincaculator.model.ISO3Formatter
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val output: MutableLiveData<String> = MutableLiveData()
-    private val minLength = application.resources.getInteger(R.integer.pin_min_length)
-    private val maxLength = application.resources.getInteger(R.integer.pin_max_length)
+    private val minLength by lazy { application.resources.getInteger(R.integer.pin_min_length) }
+    private val maxLength by lazy { application.resources.getInteger(R.integer.pin_max_length) }
     private val formatter = ISO3Formatter()
 
     fun enterPin(pin: String)  {
         if (pin.length < minLength) {
-            output.postValue(getApplication<Application>().resources.getString(R.string.pin_too_short))
+            with(output) { postValue(this@MainViewModel.getApplication<Application>().resources.getString(R.string.pin_too_short)) }
             return
         }
         if (pin.length > maxLength) {
-            output.postValue(getApplication<Application>().resources.getString(R.string.pin_too_long))
+            with(output) { postValue(this@MainViewModel.getApplication<Application>().resources.getString(R.string.pin_too_long)) }
             return
         }
         val pinBlock = formatter.format(pin, Formatter.DEFAULT_PAN)

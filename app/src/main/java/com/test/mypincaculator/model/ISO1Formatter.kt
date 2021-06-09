@@ -16,7 +16,7 @@ class ISO1Formatter : Formatter() {
         val pinArray = pin.map { it.toString().toByte() }.toByteArray()
         result[0] = setHiNibbleValue(HEADER) or setLowNibbleValue(pinArray.size.toByte())
         for (i in 1 until result.lastIndex) {
-            val index: Int = (i - 1) * 2;
+            val index: Int = (i - 1) * 2
             val hiNibbleValue = if (index <= pin.lastIndex) pinArray[index] else DEFAULT_VALUE
             val loNibbleValue =
                 if ((index + 1) <= pin.lastIndex) pinArray[index + 1] else DEFAULT_VALUE
